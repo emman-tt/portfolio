@@ -1,26 +1,351 @@
 @import "tailwindcss";
 
+/* ---------- Theme tokens — LIGHT MODE (warm paper) ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f1eee7;
+  --surface: #fbf9f4;
+  --surface-2: #e9e5db;
+  --ink: #161510;
+  --muted: #6f6a61;
+  --label: #8f8a80;
+  --accent: #4c5cd8;
+  --accent-ink: #f4f2ec;
+  --blue: #4c5cd8;
+  --line: #d9d4c9;
+  --hair: rgba(22, 21, 16, 0.18);
+  --paper: #faf8f3;
+  --paper-ink: #161510;
+  --paper-muted: #77726a;
+  --pop1: #9db4ff;
+  --pop2: #c9f26a;
+  --pop3: #b29aff;
+  --pop-opacity: 0.75;
+  --shadow-pop: rgba(0, 0, 0, 0.55);
+  --stamp-shadow: rgba(0, 0, 0, 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-label: var(--label);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-blue: var(--blue);
+  --color-line: var(--line);
+  --color-hair: var(--hair);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
+  --font-display: var(--font-archivo);
+  --font-tight: var(--font-inter-tight);
+  --font-serif: var(--font-instrument);
   --font-mono: var(--font-geist-mono);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+::selection {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* tiny helpers */
+.label-mono {
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.tracker {
+  letter-spacing: 0.08em;
+}
+
+
+/* ---------- Marquee ---------- */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-card:hover .marquee {
+  animation-play-state: paused;
+}
+
+/* ---------- Statement blur-focus (legacy word treatment) ----------
+   (unused since the pinned stairs rewrite) */
+
+/* ---------- Staircase statement (pinned ink reveal) ---------- */
+.step-line {
+  display: block;
+  width: fit-content;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+.step-line > span {
+  display: inline-block;
+}
+@media (min-width: 900px) {
+  .step-line {
+    margin-left: var(--step, 0%);
+    rotate: var(--tilt, 0deg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------- Lanyard hardware ---------- */
+
+/* woven polyester strap — flat webbing, fine weave, bound edges */
+.lanyard-strap {
+  position: relative;
+  width: 21px;
+  border-radius: 1px;
+  background-color: #3a3a35;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      rgba(0, 0, 0, 0.14) 1px 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0 1px,
+      transparent 1px 2px
+    ),
+    linear-gradient(
+      90deg,
+      #1b1b1a 0%,
+      #2e2e2b 8%,
+      #3d3d38 30%,
+      #44443e 50%,
+      #3c3c37 70%,
+      #2b2b28 92%,
+      #191918 100%
+    );
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.22),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.45),
+    inset 3px 0 4px -3px rgba(0, 0, 0, 0.55),
+    inset -3px 0 4px -3px rgba(0, 0, 0, 0.55);
+  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.14));
+}
+
+/* bound edge seams */
+.lanyard-strap::before,
+.lanyard-strap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 1px;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.16) 0 3px,
+    rgba(0, 0, 0, 0.22) 3px 6px
+  );
+}
+.lanyard-strap::after {
+  left: auto;
+  right: 2px;
+}
+
+/* folded, stitched strap end */
+.lanyard-hem {
+  position: relative;
+  z-index: 3;
+  width: 23px;
+  height: 11px;
+  margin-top: -1px;
+  border-radius: 1px 1px 2.5px 2.5px;
+  background-color: #3a3a35;
+  background-image:
+    repeating-linear-gradient(
+      46deg,
+      rgba(255, 255, 255, 0.1) 0 1px,
+      rgba(0, 0, 0, 0.14) 1px 2px,
+      transparent 2px 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.34) 0 1.5px,
+      rgba(255, 255, 255, 0.05) 1.5px 3px
+    ),
+    linear-gradient(90deg, #191918, #51514a 35%, #62625a 50%, #44443e 72%, #171716);
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55),
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.14);
+}
+.lanyard-hem::after {
+  content: "";
+  position: absolute;
+  inset: 4px 2.5px auto;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.6) 0 3px,
+    transparent 3px 5.5px
+  );
+  opacity: 0.65;
+}
+
+/* brushed-steel rail eyelet */
+.rail-eye {
+  position: relative;
+  z-index: 1;
+  width: 15px;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    #f2f2ec 0%,
+    #b4b4ad 32%,
+    #77776f 62%,
+    #d8d8d1 88%,
+    #8d8d85 100%
+  );
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.35);
+}
+.rail-eye::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 7px;
+  height: 4px;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+  background: #100f0f;
+  box-shadow: inset 0 1px 1.5px rgba(0, 0, 0, 0.95);
+}
+
+/* ---------- ID cards ---------- */
+.id-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.1),
+    inset 0 -22px 34px -24px rgba(0, 0, 0, 0.4),
+    0 1px 1px rgba(0, 0, 0, 0.18),
+    0 2px 0 rgba(0, 0, 0, 0.12),
+    0 12px 22px -9px rgba(0, 0, 0, 0.26),
+    0 30px 48px -20px rgba(0, 0, 0, 0.28),
+    0 62px 92px -44px rgba(0, 0, 0, 0.25);
+}
+
+/* matte print grain */
+.card-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* lamp reflection sweeping across the print */
+.card-gloss {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+  background: linear-gradient(
+    116deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.2) 14%,
+    transparent 32%,
+    transparent 68%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
+}
+
+/* punched hole, with the cut edge catching light */
+.punch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  z-index: 2;
+  width: 17px;
+  height: 17px;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: radial-gradient(circle at 50% 62%, #080807 0%, #121110 52%, #2b2a27 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.42),
+    inset 0 1.5px 2px rgba(0, 0, 0, 0.95),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.14),
+    0 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Ticket stubs ---------- */
+
+/* ---------- Work rows ---------- */
+.work-name {
+  color: #55524a;
+  transition: color 0.3s ease;
+}
+.work-name.is-active,
+.work-row:hover .work-name {
+  color: var(--ink);
+}
+
+/* ---------- Scroll strip ---------- */
+.strip {
+  scrollbar-width: none;
+}
+.strip::-webkit-scrollbar {
+  display: none;
+}
+.strip figcaption {
+  color: var(--muted);
+}
+
+/* work rows — caution tape for the warning strip */
+.hazard-tape {
+  height: 5px;
+  background-color: #c9f26a;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #161510 0 7px,
+    transparent 7px 14px
+  );
+}
+
+/* footer cta */
+.footer-cta {
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* statement font */
+.statement {
+  font-family: var(--font-inter-tight);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
 }
