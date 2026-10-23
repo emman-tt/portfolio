@@ -9,7 +9,6 @@ ENV PATH="$PNPM_HOME:$PATH"
 WORKDIR /app
 
 
-# Copy package-related files first to leverage Docker's caching mechanism
 COPY package.json  pnpm-lock.yaml* pnpm-workspace.yaml* .npmrc* ./
 
 
@@ -41,16 +40,12 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# 1. Copy public folder (images, fonts)
 COPY --from=builder --chown=node:node /app/public ./public
 
-# 2. Create the .next cache directory and give ownership to 'node'
 RUN mkdir .next && chown node:node .next
 
-# 3. Copy the standalone output (includes server.js and minimal node_modules)
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 
-# 4. Copy the static assets into the .next folder
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 
 # 5. Switch to the built-in non-root user
