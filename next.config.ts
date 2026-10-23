@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   async redirects() {
+    
     return [
       // "/" is not a designed route on this site — send visitors to "/home".
       {
@@ -12,6 +13,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  output:"standalone",
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
