@@ -95,14 +95,27 @@ body {
   width: fit-content;
   line-height: 0.94;
   letter-spacing: -0.03em;
+  font-size: var(--s, inherit);
 }
 .step-line > span {
   display: inline-block;
+}
+@media (max-width: 899.98px) {
+  /* phones: rows re-wrap instead of staying on one fixed line, so the
+     type can stay big; tilt + a softened indent stay on for the staircase
+     (they used to be desktop-only, which flattened the whole design) */
+  .step-line {
+    white-space: normal;
+    font-size: clamp(46px, 11.5vw, 84px);
+    margin-left: calc(var(--step, 0%) * 0.45);
+    rotate: var(--tilt, 0deg);
+  }
 }
 @media (min-width: 900px) {
   .step-line {
     margin-left: var(--step, 0%);
     rotate: var(--tilt, 0deg);
+    white-space: nowrap;
   }
 }
 

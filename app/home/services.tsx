@@ -317,7 +317,7 @@ function Hanger({
         {/* ID card — hangs off the clip, counter-sways on its own spring */}
         <div
           ref={cardRef}
-          className="relative z-0 -mt-[20px] cursor-grab touch-none select-none active:cursor-grabbing"
+          className="relative z-0 -mt-[20px] cursor-grab touch-pan-y select-none active:cursor-grabbing"
           style={{ transformOrigin: "top center" }}
         >
           <div

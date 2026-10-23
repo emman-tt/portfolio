@@ -6,6 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  // mobile URL bars collapse/expand as you scroll — without this iOS
+  // re-audits every trigger on each viewport resize and pins jitter
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 const prefersReduced = () =>

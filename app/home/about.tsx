@@ -4,7 +4,7 @@ import { Fragment, useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { statementLines } from "@/lib/content";
-import { useGsap } from "../shared/gsap";
+import { useGsap, ScrollTrigger } from "../shared/gsap";
 
 if (typeof window !== "undefined") gsap.registerPlugin(SplitText);
 
@@ -72,6 +72,10 @@ export function About() {
             start: "top top",
             end: "+=200%",
             pin: true,
+            // touch: transform pinning — the pinned section stays in flow
+            // inside its spacer, so no ancestor (overflow clips, SAF quirks,
+            // fixed-position edge cases) can ever take it out of view
+            pinType: ScrollTrigger.isTouch ? "transform" : "fixed",
             scrub: 0.6,
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -101,7 +105,7 @@ export function About() {
                 {
                   "--step": ROW_STYLE[ri].step,
                   "--tilt": ROW_STYLE[ri].tilt,
-                  fontSize: ROW_STYLE[ri].size,
+                  "--s": ROW_STYLE[ri].size,
                 } as React.CSSProperties
               }
             >
