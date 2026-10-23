@@ -1,35 +1,43 @@
 import type { Metadata } from "next";
-import { Archivo, Geist_Mono, Inter, Inter_Tight, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteNav } from "./shared/site-nav";
 import "./globals.css";
 
-const archivo = Archivo({
+const archivo = localFont({
+  src: "./fonts/archivo-var.woff2",
   variable: "--font-archivo",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const interTight = Inter_Tight({
+const interTight = localFont({
+  src: "./fonts/inter-tight-var.woff2",
   variable: "--font-inter-tight",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const inter = Inter({
+const inter = localFont({
+  src: "./fonts/inter-var.woff2",
   variable: "--font-inter",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/geist-mono-var.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const instrument = Instrument_Serif({
+const instrument = localFont({
+  src: [
+    { path: "./fonts/instrument-serif.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/instrument-serif-italic.woff2", weight: "400", style: "italic" },
+  ],
   variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: "400",
-  style: "normal",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
