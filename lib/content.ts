@@ -7,6 +7,7 @@ export type WorkItem = {
   stack: string;
   href: string;
   video?: string;
+  poster?: string;
   cover?: string;
   github?: string;
   githubPrivate?: boolean;
@@ -21,6 +22,7 @@ export const work: WorkItem[] = [
     year: "2025",
     stack: "NEXT.JS",
     video: "https://portfolio.emmanverse.uk/videos/jobfaster.mp4",
+    poster: "/posters/jobfaster.jpg",
     href: "https://jobfaster.org",
     github: "https://github.com/emman-tt/jobfaster",
   },
@@ -32,6 +34,7 @@ export const work: WorkItem[] = [
     year: "2025",
     stack: "NEXT.JS",
     video: "https://portfolio.emmanverse.uk/videos/swaggpa.mp4",
+    poster: "/posters/swaggpa.jpg",
     href: "https://swapgpa.com",
     github: "https://github.com/emman-tt/swapgpa",
     githubPrivate: true,
@@ -44,6 +47,7 @@ export const work: WorkItem[] = [
     year: "2026",
     stack: "REACT · MQTT",
     video: "https://portfolio.emmanverse.uk/videos/cozyhome.mp4",
+    poster: "/posters/cozyhome.jpg",
     href: "https://cozyhome.emmanverse.uk",
     github: "https://github.com/emman-tt/cozyhome",
   },
@@ -55,6 +59,7 @@ export const work: WorkItem[] = [
     year: "2026",
     stack: "NEXT.JS · STRIPE",
     video: "https://portfolio.emmanverse.uk/videos/rosait.mp4",
+    poster: "/posters/rosait.jpg",
     href: "https://rosait.emmanverse.uk",
     github: "https://github.com/emman-tt/rosait",
   },
@@ -66,6 +71,7 @@ export const work: WorkItem[] = [
     year: "2027",
     stack: "NEXT.JS · RECHARTS",
     video: "https://portfolio.emmanverse.uk/videos/vita.mp4",
+    poster: "/posters/vita.jpg",
     href: "https://vita.emmanverse.uk",
     github: "https://github.com/emman-tt/vita",
   },
@@ -77,6 +83,7 @@ export const work: WorkItem[] = [
     year: "2026",
     stack: "NEXT.JS",
     video: "https://portfolio.emmanverse.uk/videos/episcopal-church.mp4",
+    poster: "/posters/episcopal-church.jpg",
     href: "https://episcopal.emmanverse.uk",
     github: "https://github.com/emman-tt/episcopal-church",
   },
@@ -88,6 +95,7 @@ export const work: WorkItem[] = [
     year: "2026",
     stack: "REACT · GSAP",
     video: "https://portfolio.emmanverse.uk/videos/instrumento.mp4",
+    poster: "/posters/instrumento.jpg",
     href: "https://instrumento.emmanverse.uk",
     github: "https://github.com/emman-tt/instruments",
   },
@@ -99,6 +107,7 @@ export const work: WorkItem[] = [
     year: "2026",
     stack: "NEXT.JS",
     video: "https://portfolio.emmanverse.uk/videos/fasho.mp4",
+    poster: "/posters/fasho.jpg",
     href: "https://fasho.emmanverse.uk",
     github: "https://github.com/emman-tt/fasho",
   },

@@ -218,6 +218,7 @@ export function WorkList() {
                         inlineRefs.current[i] = el;
                       }}
                       src={row.video}
+                      poster={row.poster}
                       muted
                       playsInline
                       preload={i === active ? "auto" : "metadata"}
@@ -296,6 +297,7 @@ export function WorkList() {
                       videoRefs.current[i] = el;
                     }}
                     src={p.video}
+                    poster={p.poster}
                     muted
                     playsInline
                     preload={i === active ? "auto" : "metadata"}
